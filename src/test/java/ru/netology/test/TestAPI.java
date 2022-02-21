@@ -30,12 +30,15 @@ public class TestAPI {
         // Предусловия
         given()
                 .baseUri("http://localhost:8080/")
+                .body(DataHelper.getCardInfoApproved())
                 // Выполняемые действия
                 .when()
                 .post("/api/v1/pay")
                 // Проверки
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .contentType(ContentType.JSON);
+
     }
 
 }

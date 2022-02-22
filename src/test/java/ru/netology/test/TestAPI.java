@@ -1,6 +1,8 @@
 package ru.netology.test;
+
 import io.restassured.http.ContentType;
 import lombok.val;
+import okhttp3.MediaType;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 import ru.netology.data.DbInteraction;
@@ -30,14 +32,14 @@ public class TestAPI {
         // Предусловия
         given()
                 .baseUri("http://localhost:8080/")
+                //.contentType(ContentType.JSON)
                 .body(DataHelper.getCardInfoApproved())
                 // Выполняемые действия
                 .when()
                 .post("/api/v1/pay")
                 // Проверки
                 .then()
-                .statusCode(200)
-                .contentType(ContentType.JSON);
+                .statusCode(200);
 
     }
 

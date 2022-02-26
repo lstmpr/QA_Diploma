@@ -1,6 +1,10 @@
 package ru.netology.test;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 import ru.netology.data.DbInteraction;
@@ -12,6 +16,16 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestDebitCard {
+
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
 
     @Test
     public void shouldBeStatusApprovedInDB() {
@@ -106,6 +120,7 @@ public class TestDebitCard {
         PaymentCard.wrongDataInField();
 
     }
+
     @Test
     public void shouldBeNotSuccessfulCardWithWrongFormatMonth() {
         open("http://localhost:8080/");
@@ -214,8 +229,4 @@ public class TestDebitCard {
         PaymentCard.allCardInformation(invalidCardInfo);
         PaymentCard.wrongDataInField();
     }
-//    @AfterAll
-//    static void cleanDB() {
-//        DbInteraction.cleanDb();
-//    }
 }

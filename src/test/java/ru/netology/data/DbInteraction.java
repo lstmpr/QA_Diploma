@@ -74,21 +74,5 @@ public class DbInteraction {
         return statusCredit;
     }
 
-    @SneakyThrows
-    public static void cleanDb() {
-        String deleteCreditDB = "DELETE FROM credit_request_entity WHERE TRUE;";
-        String deleteDebitDB = "DELETE FROM payment_entity WHERE TRUE;";
-        String deleteDBForAll = "DELETE FROM order_entity WHERE TRUE;";
-        try (Connection conn = getConnectionDB();
-             Statement deleteCardsStmt = conn.createStatement();
-             Statement deleteAuthCodesStmt = conn.createStatement();
-             Statement deleteUsersStmt = conn.createStatement();
-        ) {
-            deleteCardsStmt.executeUpdate(deleteCreditDB);
-            deleteAuthCodesStmt.executeUpdate(deleteDebitDB);
-            deleteUsersStmt.executeUpdate(deleteDBForAll);
-        }
-    }
-
 
 }

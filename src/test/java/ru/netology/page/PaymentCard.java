@@ -4,6 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.netology.data.DataHelper;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -21,21 +23,21 @@ public class PaymentCard {
 
 
     public void allCardInformation(DataHelper.CardInfo cardInfo) {
-        cardNumField.setValue(cardInfo.getCardNum());
-        monthField.setValue(cardInfo.getMonthNum());
+        cardNumField.setValue(cardInfo.getNumber());
+        monthField.setValue(cardInfo.getMonth());
         yearField.setValue(cardInfo.getYear());
-        ownerField.setValue(cardInfo.getOwnerCard());
-        cvcField.setValue(cardInfo.getCvcCode());
+        ownerField.setValue(cardInfo.getHolder());
+        cvcField.setValue(cardInfo.getCvc());
         paymentButton.click();
 
     }
 
     public void successfulNotif() {
-        paymentSuccess.waitUntil(visible,15000);
+        paymentSuccess.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
     public void noSuccessfulNotif() {
-        paymentNoSuccess.waitUntil(visible, 15000);
+        paymentNoSuccess.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
     public void wrongDataInField() {

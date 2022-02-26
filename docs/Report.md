@@ -14,7 +14,7 @@
 
 #### Отчёт по Allure Report
 
-https://github.com/lstmpr/QA_Diploma/blob/1380b65af17d08c5d52cf882ef3f0853f44f931e/docs/AllureReport.png
+![](https://github.com/lstmpr/QA_Diploma/blob/1380b65af17d08c5d52cf882ef3f0853f44f931e/docs/AllureReport.png)
 
 ### Общие рекомендации
 #### Найденные баги

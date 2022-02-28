@@ -13,31 +13,16 @@
 1. Склонировать репозиторий
 git clone https://github.com/lstmpr/QA_Diploma.git
 2. Перейти в папку QA_Diploma
-3. Запустить контейнеры:
-
-Для работы с базой данных mysql выполнить команду:
-docker-compose -f docker-compose-mysql.yml up -d После прогона тестов остановить контейнеры:
-docker-compose -f docker-compose-mysql.yml down
-
-Для работы с базой данных postgres выполнить команду:
-docker-compose -f docker-compose-postgres.yml up -d После прогона тестов остановить контейнеры:
-docker-compose -f docker-compose-postgres.yml down
+3. Запустить контейнеры Node.js, MySQL, PostgreSQL выполнив команду docker-compose up.
 
 4. Запустить приложение:
 
-Для запуска приложения с базой данных mysql выполнить команду:
-java -Dspring.datasource.url=jdbc:mysql://192.168.99.100:3306/app -jar aqa-shop.jar
+* для базы данных MySQL выполнив команду: java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:mysql://localhost:3306/app;
 
-Для запуска приложения с базой данных postgres выполнить команду:
-java -Dspring.datasource.url=jdbc:postgresql://192.168.99.100:5432/app -jar aqa-shop.jar
+* для базы данных PostgreSQL выполнив команду: java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:postgresql://localhost:5432/postgres.
 
-5. Запустить тесты:
 
-Для запуска тестов с базой данных mysql выполнить команду:
-gradlew test -Ddb.url=jdbc:mysql://192.168.99.100:3306/app
-
-Для запуска тестов с базой данных postgres выполнить команду:
-gradlew test -Ddb.url=jdbc:postgresql://192.168.99.100:5432/app
+5. Запустить тесты выполнив команду: .\gradlew test.
 
 6. Сформировать отчеты командой:
 gradlew allureReport

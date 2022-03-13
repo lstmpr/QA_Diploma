@@ -1,6 +1,6 @@
 ## Диплом по курсу "Тестировщик ПО"
 
-[План автоматизации](https://github.com/lstmpr/QA_Diploma/blob/2b43115d49fb7f7e83d2d71c1add9123133ec2d2/docs/plan.md)
+[План автоматизации](https://github.com/lstmpr/QA_Diploma/blob/d677b55126da6c9eeff5d2eb8e1d1b35d91d4581/docs/plan.md)
 
 [Отчет по итогам тестирования](https://github.com/lstmpr/QA_Diploma/blob/2b43115d49fb7f7e83d2d71c1add9123133ec2d2/docs/Report.md)
 

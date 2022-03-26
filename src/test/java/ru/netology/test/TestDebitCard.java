@@ -11,6 +11,7 @@ import ru.netology.data.DbInteraction;
 import ru.netology.page.TripPage;
 
 import java.sql.SQLException;
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,7 +50,8 @@ public class TestDebitCard {
         val PaymentCard = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoDeclined();
         PaymentCard.allCardInformation(invalidCardInfo);
-        Thread.sleep(8000);
+        PaymentCard.successfulNotif();
+        Duration.ofSeconds(8000);
         var paymentId = DbInteraction.getPaymentId();
         var statusActual = DbInteraction.getStatusDebitCard(paymentId);
 
@@ -139,7 +141,7 @@ public class TestDebitCard {
         val PaymentCard = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoMonthFieldWithDoubleZero();
         PaymentCard.allCardInformation(invalidCardInfo);
-        Thread.sleep(8000);
+        Duration.ofSeconds(8000);
         PaymentCard.wrongDataInField();
 
     }
@@ -184,7 +186,7 @@ public class TestDebitCard {
         val PaymentCard = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongName();
         PaymentCard.allCardInformation(invalidCardInfo);
-        Thread.sleep(8000);
+        Duration.ofSeconds(8000);
         PaymentCard.wrongDataInField();
     }
 
@@ -195,7 +197,7 @@ public class TestDebitCard {
         val PaymentCard = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatName();
         PaymentCard.allCardInformation(invalidCardInfo);
-        Thread.sleep(8000);
+        Duration.ofSeconds(8000);
         PaymentCard.wrongDataInField();
     }
 

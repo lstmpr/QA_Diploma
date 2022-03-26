@@ -1,26 +1,28 @@
 package ru.netology.data;
 
-import com.github.javafaker.Faker;
 import lombok.SneakyThrows;
+
 import java.sql.DriverManager;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.sql.*;
 
 public class DbInteraction {
-    //@BeforeEach
+    @BeforeEach
     @SneakyThrows
-    public static Connection getConnectionDB() {
-        Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/app", "app", "pass");
+    public static Connection getConnectionDB() throws SQLException {
+        String dbUrl = System.getProperty("db.url");
+        String login = System.getProperty("login");
+        String password = System.getProperty("password");
+        final Connection connection = DriverManager.getConnection(dbUrl, login, password);
         return connection;
     }
 
     @SneakyThrows
     public static String getPaymentId() {
         String paymentId = null;
-        String  SQLId = "SELECT payment_id FROM order_entity order by created desc limit 1;";
+        String SQLId = "SELECT payment_id FROM order_entity order by created desc limit 1;";
 
         try (
                 Connection conn = getConnectionDB();

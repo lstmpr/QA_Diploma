@@ -22,7 +22,11 @@ git clone https://github.com/lstmpr/QA_Diploma.git
 * для базы данных PostgreSQL выполнив команду: java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:postgresql://localhost:5432/postgres.
 
 
-5. Запустить тесты выполнив команду: .\gradlew test.
+5. Запустить тесты выполнив команду:
+
+* для базы данных MySQL выполнив команду: gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app";
+
+* для базы данных PostgreSQL выполнив команду: gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app".
 
 6. Сформировать отчеты командой:
 gradlew allureReport

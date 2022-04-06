@@ -15,10 +15,10 @@ public class TripPage {
     private SelenideElement bueCreditCardButton = $(byText("Купить в кредит"));
     private SelenideElement fieldPayment = $("#root > div >h3");
 
-    public CreditCard selectDebitCard() {
+    public PaymentCard selectDebitCard() {
         bueCardButton.click();
         fieldPayment.shouldHave(exactText("Оплата по карте"));
-        return new CreditCard();
+        return new PaymentCard();
     }
 
     public CreditCard selectCreditCard() {

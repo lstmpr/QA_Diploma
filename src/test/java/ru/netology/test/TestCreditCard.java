@@ -32,10 +32,10 @@ public class TestCreditCard {
     public void shouldBeStatusApprovedInDB() {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val validCardInfo = DataHelper.getCardInfoApproved();
-        CreditCard.allCardInformation(validCardInfo);
-        CreditCard.successfulNotif();
+        creditCardPage.allCardInformation(validCardInfo);
+        creditCardPage.successfulNotif();
         var paymentId = DbInteraction.getPaymentId();
         var statusActual = DbInteraction.getStatusCreditCard(paymentId);
         var statusExpected = "APPROVED";
@@ -62,10 +62,10 @@ public class TestCreditCard {
     public void shouldBeSuccessfulNotificationStatusApproved() throws SQLException {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val validCardInfo = DataHelper.getCardInfoShouldBeOk();
-        CreditCard.allCardInformation(validCardInfo);
-        CreditCard.successfulNotif();
+        creditCardPage.allCardInformation(validCardInfo);
+        creditCardPage.successfulNotif();
         var paymentId = DbInteraction.getPaymentId();
         var statusActual = DbInteraction.getStatusDebitCard(paymentId);
         var statusExpected = "APPROVED";
@@ -77,10 +77,10 @@ public class TestCreditCard {
     public void shouldBeNotSuccessfulNotificationStatusDeclined() {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoDeclined();
-        CreditCard.allCardInformation(invalidCardInfo);
-        CreditCard.noSuccessfulNotif();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.noSuccessfulNotif();
         var paymentId = DbInteraction.getPaymentId();
         var statusActual = DbInteraction.getStatusDebitCard(paymentId);
         var statusExpected = "DECLINED";
@@ -92,10 +92,10 @@ public class TestCreditCard {
     public void shouldBeNotSuccessfulCardWithWrongNumber() {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongNumber();
-        CreditCard.allCardInformation(invalidCardInfo);
-        CreditCard.noSuccessfulNotif();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.noSuccessfulNotif();
 
     }
 
@@ -103,10 +103,10 @@ public class TestCreditCard {
     public void shouldBeNotSuccessfulCardWithWrongMonth() {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongMonth();
-        CreditCard.allCardInformation(invalidCardInfo);
-        CreditCard.wrongDataInField();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongDataInField();
 
     }
 
@@ -114,21 +114,21 @@ public class TestCreditCard {
     public void shouldBeNotSuccessfulCardWithWrongYear() {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongYear();
-        CreditCard.allCardInformation(invalidCardInfo);
-        CreditCard.wrongDataInField();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongDataInField();
     }
 
     @Test
     public void shouldBeNotSuccessfulCardWithWrongName() throws InterruptedException {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongName();
-        CreditCard.allCardInformation(invalidCardInfo);
+        creditCardPage.allCardInformation(invalidCardInfo);
         Duration.ofSeconds(8000);
-        CreditCard.wrongDataInField();
+        creditCardPage.wrongDataInField();
 
     }
 
@@ -136,19 +136,19 @@ public class TestCreditCard {
     public void shouldBeNotSuccessfulCardWithWrongCVC() {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongCVC();
-        CreditCard.allCardInformation(invalidCardInfo);
-        CreditCard.wrongDataInField();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongDataInField();
     }
 
     @Test
     public void shouldBeNotSuccessfulEmptyField() {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithEmptyFields();
-        CreditCard.allCardInformation(invalidCardInfo);
-        CreditCard.wrongDataInField();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongDataInField();
     }
 }

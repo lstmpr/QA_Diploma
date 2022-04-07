@@ -13,14 +13,12 @@ compileTestJava.options.encoding = "UTF-8"
 
 allure {
     version = '2.16.1'
-
     useJUnit5 {
         version = '2.16.1'
     }
 }
 
 repositories {
-
     mavenCentral()
 }
 
@@ -29,7 +27,7 @@ dependencies {
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'mysql:mysql-connector-java:8.0.28'
-    testImplementation 'com.codeborne:selenide:6.3.0'
+    testImplementation 'com.codeborne:selenide:6.3.5'
     testImplementation 'org.projectlombok:lombok:1.18.22'
     testImplementation 'io.rest-assured:rest-assured:4.5.0'
     testImplementation 'com.google.code.gson:gson:2.9.0'
@@ -37,15 +35,13 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-selenide:2.17.2'
     testImplementation 'org.postgresql:postgresql:42.3.2'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
-
 }
 
 test {
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-    systemProperty 'db.url', System.getProperty('url', 'jdbc:mysql://localhost:3306/app')
+    systemProperty 'db.url', System.getProperty('db.url')
     systemProperty "login", System.getProperty("login", "app")
     systemProperty "password", System.getProperty("password", "pass")
     systemProperty "app.url", System.getProperty("app.url", "http://localhost:8080")
 }
-

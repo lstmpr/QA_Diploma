@@ -47,9 +47,9 @@ public class TestCreditCard {
     public void shouldBeStatusDeclinedInDB() throws SQLException, InterruptedException {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
-        val CreditCard = tripPage.selectCreditCard();
+        val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoDeclined();
-        CreditCard.allCardInformation(invalidCardInfo);
+        creditCardPage.allCardInformation(invalidCardInfo);
         Duration.ofSeconds(8000);
         var paymentId = DbInteraction.getPaymentId();
         var statusActual = DbInteraction.getStatusCreditCard(paymentId);

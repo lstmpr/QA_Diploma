@@ -13,13 +13,13 @@
 1. Склонировать репозиторий
 git clone https://github.com/lstmpr/QA_Diploma.git
 2. Перейти в папку QA_Diploma
-3. Запустить контейнеры Node.js, MySQL, PostgreSQL выполнив команду docker-compose up.
+3. Запустить контейнеры Node.js, MySQL, PostgreSQL выполнив команду docker-compose up --build.
 
 4. Запустить приложение:
 
-* для базы данных MySQL выполнив команду: java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:mysql://localhost:3306/app;
+* для базы данных MySQL выполнив команду: java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar
 
-* для базы данных PostgreSQL выполнив команду: java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:postgresql://localhost:5432/postgres.
+* для базы данных PostgreSQL выполнив команду: java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar
 
 
 5. Запустить тесты выполнив команду:

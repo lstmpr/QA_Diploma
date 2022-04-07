@@ -13,7 +13,7 @@
 1. Склонировать репозиторий
 git clone https://github.com/lstmpr/QA_Diploma.git
 2. Перейти в папку QA_Diploma
-3. Запустить контейнеры Node.js, MySQL, PostgreSQL выполнив команду docker-compose up.
+3. Запустить контейнеры Node.js, MySQL, PostgreSQL выполнив команду docker-compose up --build.
 
 4. Запустить приложение:
 

@@ -44,7 +44,7 @@ public class TestDebitCard {
     }
 
     @Test
-    public void shouldBeNotSuccessfulNotificationStatusDeclined() {
+    public void shouldBeNotSuccessfulNotificationStatusDeclined() throws SQLException {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
         val paymentCardPage = tripPage.selectDebitCard();
@@ -66,6 +66,10 @@ public class TestDebitCard {
         val invalidCardInfo = DataHelper.getCardInfoWithWrongNumber();
         paymentCardPage.allCardInformation(invalidCardInfo);
         paymentCardPage.noSuccessfulNotif();
+        var paymentId = DbInteraction.getPaymentId();
+        var statusActual = DbInteraction.getStatusDebitCard(paymentId);
+        var statusExpected = "DECLINED";
+        assertEquals(statusExpected, statusActual);
 
     }
 
@@ -77,7 +81,7 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatNumberCardField();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFormatDataInField();
 
     }
 
@@ -88,7 +92,7 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongMonth();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongDataLimitField();
 
     }
 
@@ -99,7 +103,7 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoMonthWithWrongFormat();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFormatDataInField();
 
     }
 
@@ -111,7 +115,7 @@ public class TestDebitCard {
         val invalidCardInfo = DataHelper.getCardInfoMonthFieldWithDoubleZero();
         paymentCardPage.allCardInformation(invalidCardInfo);
         Duration.ofSeconds(8000);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongDataLimitField();
 
     }
 
@@ -122,7 +126,7 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongYear();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFieldCardExpired();
 
     }
 
@@ -133,18 +137,18 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatYear();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFormatDataInField();
 
     }
 
     @Test
-    public void shouldBeNotSuccessfulCardWithWrongFormatYearWithYear() {
+    public void shouldBeNotSuccessfulCardWithWrongFormatYearWithZero() {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatYearWithZero();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFieldCardExpired();
 
     }
 
@@ -156,7 +160,7 @@ public class TestDebitCard {
         val invalidCardInfo = DataHelper.getCardInfoWithWrongName();
         paymentCardPage.allCardInformation(invalidCardInfo);
         Duration.ofSeconds(8000);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFormatDataInField();
     }
 
     @Test
@@ -167,7 +171,7 @@ public class TestDebitCard {
         val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatName();
         paymentCardPage.allCardInformation(invalidCardInfo);
         Duration.ofSeconds(8000);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFormatDataInField();
     }
 
     @Test
@@ -177,7 +181,7 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongCVC();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFormatDataInField();
     }
 
     @Test
@@ -187,7 +191,7 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatCVC();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongFormatDataInField();
     }
 
 
@@ -198,6 +202,6 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithEmptyFields();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        paymentCardPage.wrongDataInField();
+        paymentCardPage.wrongEmptyField();
     }
 }

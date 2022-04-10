@@ -28,35 +28,6 @@ public class TestCreditCard {
         SelenideLogger.removeListener("allure");
     }
 
-    @Test
-    public void shouldBeStatusApprovedInDB() {
-        open("http://localhost:8080/");
-        val tripPage = new TripPage();
-        val creditCardPage = tripPage.selectCreditCard();
-        val validCardInfo = DataHelper.getCardInfoApproved();
-        creditCardPage.allCardInformation(validCardInfo);
-        creditCardPage.successfulNotif();
-        var paymentId = DbInteraction.getPaymentId();
-        var statusActual = DbInteraction.getStatusCreditCard(paymentId);
-        var statusExpected = "APPROVED";
-        assertEquals(statusExpected, statusActual);
-
-    }
-
-    @Test
-    public void shouldBeStatusDeclinedInDB() throws SQLException, InterruptedException {
-        open("http://localhost:8080/");
-        val tripPage = new TripPage();
-        val creditCardPage = tripPage.selectCreditCard();
-        val invalidCardInfo = DataHelper.getCardInfoDeclined();
-        creditCardPage.allCardInformation(invalidCardInfo);
-        Duration.ofSeconds(8000);
-        var paymentId = DbInteraction.getPaymentId();
-        var statusActual = DbInteraction.getStatusCreditCard(paymentId);
-
-        assertEquals("DECLINED", statusActual);
-
-    }
 
     @Test
     public void shouldBeSuccessfulNotificationStatusApproved() throws SQLException {
@@ -67,14 +38,14 @@ public class TestCreditCard {
         creditCardPage.allCardInformation(validCardInfo);
         creditCardPage.successfulNotif();
         var paymentId = DbInteraction.getPaymentId();
-        var statusActual = DbInteraction.getStatusDebitCard(paymentId);
+        var statusActual = DbInteraction.getStatusCreditCard(paymentId);
         var statusExpected = "APPROVED";
         assertEquals(statusExpected, statusActual);
 
     }
 
     @Test
-    public void shouldBeNotSuccessfulNotificationStatusDeclined() {
+    public void shouldBeNotSuccessfulNotificationStatusDeclined() throws SQLException {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
         val creditCardPage = tripPage.selectCreditCard();
@@ -82,20 +53,35 @@ public class TestCreditCard {
         creditCardPage.allCardInformation(invalidCardInfo);
         creditCardPage.noSuccessfulNotif();
         var paymentId = DbInteraction.getPaymentId();
-        var statusActual = DbInteraction.getStatusDebitCard(paymentId);
+        var statusActual = DbInteraction.getStatusCreditCard(paymentId);
         var statusExpected = "DECLINED";
         assertEquals(statusExpected, statusActual);
 
     }
 
     @Test
-    public void shouldBeNotSuccessfulCardWithWrongNumber() {
+    public void shouldBeNotSuccessfulCardWithWrongNumber() throws SQLException {
         open("http://localhost:8080/");
         val tripPage = new TripPage();
         val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongNumber();
         creditCardPage.allCardInformation(invalidCardInfo);
         creditCardPage.noSuccessfulNotif();
+        var paymentId = DbInteraction.getPaymentId();
+        var statusActual = DbInteraction.getStatusCreditCard(paymentId);
+        var statusExpected = "DECLINED";
+        assertEquals(statusExpected, statusActual);
+
+    }
+
+    @Test
+    public void shouldBeNotSuccessfulCardWithWrongFormatNumber() {
+        open("http://localhost:8080/");
+        val tripPage = new TripPage();
+        val creditCardPage = tripPage.selectCreditCard();
+        val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatNumberCardField();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongFormatDataInField();
 
     }
 
@@ -106,7 +92,30 @@ public class TestCreditCard {
         val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongMonth();
         creditCardPage.allCardInformation(invalidCardInfo);
-        creditCardPage.wrongDataInField();
+        creditCardPage.wrongDataLimitField();
+
+    }
+
+    @Test
+    public void shouldBeNotSuccessfulCardWithWrongFormatMonth() {
+        open("http://localhost:8080/");
+        val tripPage = new TripPage();
+        val creditCardPage = tripPage.selectCreditCard();
+        val invalidCardInfo = DataHelper.getCardInfoMonthWithWrongFormat();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongFormatDataInField();
+
+    }
+
+    @Test
+    public void shouldBeNotSuccessfulWrongMonthWithDoubleZero() throws InterruptedException {
+        open("http://localhost:8080/");
+        val tripPage = new TripPage();
+        val creditCardPage = tripPage.selectCreditCard();
+        val invalidCardInfo = DataHelper.getCardInfoMonthFieldWithDoubleZero();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        Duration.ofSeconds(8000);
+        creditCardPage.wrongDataLimitField();
 
     }
 
@@ -117,7 +126,29 @@ public class TestCreditCard {
         val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongYear();
         creditCardPage.allCardInformation(invalidCardInfo);
-        creditCardPage.wrongDataInField();
+        creditCardPage.wrongFieldCardExpired();
+    }
+
+    @Test
+    public void shouldBeNotSuccessfulCardWithWrongFormatYear() {
+        open("http://localhost:8080/");
+        val tripPage = new TripPage();
+        val creditCardPage = tripPage.selectCreditCard();
+        val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatYear();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongFormatDataInField();
+
+    }
+
+    @Test
+    public void shouldBeNotSuccessfulCardWithWrongFormatYearWithZero() {
+        open("http://localhost:8080/");
+        val tripPage = new TripPage();
+        val creditCardPage = tripPage.selectCreditCard();
+        val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatYearWithZero();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongFieldCardExpired();
+
     }
 
     @Test
@@ -128,8 +159,19 @@ public class TestCreditCard {
         val invalidCardInfo = DataHelper.getCardInfoWithWrongName();
         creditCardPage.allCardInformation(invalidCardInfo);
         Duration.ofSeconds(8000);
-        creditCardPage.wrongDataInField();
+        creditCardPage.wrongFormatDataInField();
 
+    }
+
+    @Test
+    public void shouldBeNotSuccessfulCardWithWrongFormatName() throws InterruptedException {
+        open("http://localhost:8080/");
+        val tripPage = new TripPage();
+        val creditCardPage = tripPage.selectCreditCard();
+        val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatName();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        Duration.ofSeconds(8000);
+        creditCardPage.wrongFormatDataInField();
     }
 
     @Test
@@ -139,7 +181,17 @@ public class TestCreditCard {
         val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongCVC();
         creditCardPage.allCardInformation(invalidCardInfo);
-        creditCardPage.wrongDataInField();
+        creditCardPage.wrongFormatDataInField();
+    }
+
+    @Test
+    public void shouldBeNotSuccessfulCardWithWrongFormatCVC() {
+        open("http://localhost:8080/");
+        val tripPage = new TripPage();
+        val creditCardPage = tripPage.selectCreditCard();
+        val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatCVC();
+        creditCardPage.allCardInformation(invalidCardInfo);
+        creditCardPage.wrongFormatDataInField();
     }
 
     @Test
@@ -149,6 +201,6 @@ public class TestCreditCard {
         val creditCardPage = tripPage.selectCreditCard();
         val invalidCardInfo = DataHelper.getCardInfoWithEmptyFields();
         creditCardPage.allCardInformation(invalidCardInfo);
-        creditCardPage.wrongDataInField();
+        creditCardPage.wrongEmptyField();
     }
 }

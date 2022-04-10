@@ -28,8 +28,5 @@ git clone https://github.com/lstmpr/QA_Diploma.git
 
 * для базы данных PostgreSQL выполнив команду: gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app".
 
-6. Сформировать отчеты командой:
-gradlew allureReport
-
-7. Открыть отчеты в браузере командой:
+6. Сформировать отчеты и открыть их в браузере командой:
 gradlew allureServe

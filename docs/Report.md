@@ -9,19 +9,19 @@
 
 ### Количество тест-кейсов
 
-####MySQL
+#### MySQL
 
 * Всего: 32 тестов
 * Успешных: 24 (75,0%)
 * Неуспешных: 8 (25,0%)
 
-####PostgreSQL
+#### PostgreSQL
 
 * Всего: 32 тестов
 * Успешных: 20 (62,5%)
 * Неуспешных: 12 (37,5%)
 
-####Отчёт по Allure Report (MySQL)
+#### Отчёт по Allure Report (MySQL)
 
 ![](https://github.com/lstmpr/QA_Diploma/blob/ac96183fe1f5d918b38fa906bf9b335a7b3e1941/docs/AllureReport%20MySQL.png)
 

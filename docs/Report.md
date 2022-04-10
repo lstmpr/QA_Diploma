@@ -12,9 +12,13 @@
 * Успешных: 21 (72,41%)
 * Неуспешных: 8 (27,59%)
 
-#### Отчёт по Allure Report
+#### Отчёт по Allure Report (MySQL)
 
-![](https://github.com/lstmpr/QA_Diploma/blob/1380b65af17d08c5d52cf882ef3f0853f44f931e/docs/AllureReport.png)
+![](https://github.com/lstmpr/QA_Diploma/blob/ac96183fe1f5d918b38fa906bf9b335a7b3e1941/docs/AllureReport%20MySQL.png)
+
+#### Отчёт по Allure Report (PostgreSQL)
+
+![](https://github.com/lstmpr/QA_Diploma/blob/ac96183fe1f5d918b38fa906bf9b335a7b3e1941/docs/AllureReport%20Postgres.png)
 
 ### Общие рекомендации
 #### Найденные баги
@@ -32,3 +36,4 @@
 •	добавить выделение цветом активной кнопки "Купить" или "Купить в кредит";  
 •	сохранять заполненные поля формы при переключении между функциями "Купить" и "Купить в кредит";  
 •	добавить проверку для всех полей на допустимые заполнения
+•	устранить проблемы с поддержкой PostgreSQL

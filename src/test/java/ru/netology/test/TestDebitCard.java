@@ -114,7 +114,6 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoMonthFieldWithDoubleZero();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        Duration.ofSeconds(8000);
         paymentCardPage.wrongDataLimitField();
 
     }
@@ -159,7 +158,6 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongName();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        Duration.ofSeconds(8000);
         paymentCardPage.wrongFormatDataInField();
     }
 
@@ -170,7 +168,6 @@ public class TestDebitCard {
         val paymentCardPage = tripPage.selectDebitCard();
         val invalidCardInfo = DataHelper.getCardInfoWithWrongFormatName();
         paymentCardPage.allCardInformation(invalidCardInfo);
-        Duration.ofSeconds(8000);
         paymentCardPage.wrongFormatDataInField();
     }
 

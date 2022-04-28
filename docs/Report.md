@@ -27,7 +27,7 @@
 
 #### Отчёт по Allure Report (PostgreSQL)
 
-![](https://github.com/lstmpr/QA_Diploma/blob/ac96183fe1f5d918b38fa906bf9b335a7b3e1941/docs/AllureReport%20Postgres.png)
+![](https://github.com/lstmpr/QA_Diploma/blob/39116e66515297df2b31f840e127c19732fe3fed/docs/AllureReport%20Postgres.png)
 
 ### Общие рекомендации
 #### Найденные баги

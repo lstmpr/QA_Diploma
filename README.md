@@ -2,7 +2,7 @@
 
 [План автоматизации](https://github.com/lstmpr/QA_Diploma/blob/a5e709d4861e6dd1a60ed80ebe588ab90c96b9e4/docs/plan.md)
 
-[Отчет по итогам тестирования](https://github.com/lstmpr/QA_Diploma/blob/19a695379fa31be675482485126eff03d05b69ba/docs/Report.md)
+[Отчет по итогам тестирования](https://github.com/lstmpr/QA_Diploma/blob/a64e43ddbae2f8d92b3226a92c4c260abe4da0a5/docs/Report.md)
 
 [Отчет по итогам автоматизации](https://github.com/lstmpr/QA_Diploma/blob/447a771e8e71c29d7477f50a2c07b273c81a3019/docs/Summary.md)
 
